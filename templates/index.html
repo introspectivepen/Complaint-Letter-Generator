@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Letter Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .dear-section {
+            display: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complaint Letter Generator</h1>
+    <form action="/generate_and_send_letter" method="post">
+        <label for="complaint_type">Complaint Type:</label>
+        <select name="complaint_type" id="complaint_type" required onchange="showDearSection()">
+            <option value="financial">Financial Fraud</option>
+            <option value="non_financial">Non-Financial Fraud</option>
+        </select>
+
+        <label for="complainant_name">Complainant Name:</label>
+        <input type="text" name="complainant_name" required>
+
+        <label for="complainant_email">Complainant Email:</label>
+        <input type="email" name="complainant_email" required>
+
+        <label for="from_address">From Address:</label>
+        <input type="text" name="from_address" required>
+
+        <label for="recipient_email">Recipient Email:</label>
+        <input type="email" name="recipient_email" required>
+
+        <label for="additional_info">Additional Information:</label>
+        <textarea name="additional_info" rows="4" required></textarea>
+
+        <div class="dear-section" id="dearSection">
+            <!-- Placeholder for Dear section, will be dynamically updated -->
+        </div>
+
+        <button type="submit">Generate and Send Letter</button>
+    </form>
+
+    <script>
+        function showDearSection() {
+            var complaintType = document.getElementById("complaint_type").value;
+            var dearSection = document.getElementById("dearSection");
+
+            if (complaintType === "financial") {
+                dearSection.innerHTML = "<label>Dear Bank,</label>";
+            } else if (complaintType === "non_financial") {
+                dearSection.innerHTML = "<label>Dear Social Media Company,</label>";
+            } else {
+                dearSection.innerHTML = ""; // Reset if none selected
+            }
+
+            dearSection.style.display = "block";
+        }
+    </script>
+</body>
+</html>
+
